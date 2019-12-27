@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->string('message');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('response');
             $table->timestamps();
         });
     }

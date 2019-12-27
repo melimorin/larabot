@@ -19,6 +19,7 @@ class BotController extends Controller
         $entity = new Message;
         $entity->message = $message;
         $entity->user_id = Auth::id();
+        $entity->response = false;
         $entity->save();
 
          /**
@@ -48,14 +49,17 @@ class BotController extends Controller
          * @todo Remplacer les informations entre [crochet] dans $reponse
          */
         $placeholders = array("[nom]", "[heure]");
-        $values = array(Auth::user()->name, now());
+        $values = array(Auth::user()->name, now()->toTimeString());
         $reponse = str_replace($placeholders, $values, $reponse);
 
-       return var_dump($reponse);
         /**
          * @todo Enregistrer $reponse dans la BDD
          */
-
+         $entity2 = new Message;
+         $entity2->message = $reponse;
+         $entity2->user_id = Auth::id();
+         $entity2->response = true;
+         $entity2->save();
         /**
          * @todo Redirection vers la page d'accueil
          */
