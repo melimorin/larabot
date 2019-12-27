@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AjoutReponseBot;
+use Illuminate\Support\Facades\Auth;
+use App\Message;
 
 class BotController extends Controller
 {
-    function reception_du_formulaire( /* ????? */ ) {
+    function reception_du_formulaire( AjoutReponseBot $request ) {
 
         /**
          * @todo Enregistrer le message de l'utilisateur dans la BDD
          */
-
+        $message = $request->input('message');
+        $entity = new Message;
+        $entity->message = $message;
+        $entity->user_id = Auth::id();
+        $entity->save();
 
          /**
          * @todo Charger le json et le décodé.
          * Les prochaines lignes prennent pour acquis que ce
          * sera dans la variable $phrases
          */
+        $phrases = [];
+
 
         $reponse = null;
 
