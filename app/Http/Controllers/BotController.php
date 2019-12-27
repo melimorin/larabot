@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\AjoutReponseBot;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Message;
 
 class BotController extends Controller
@@ -25,7 +26,9 @@ class BotController extends Controller
          * Les prochaines lignes prennent pour acquis que ce
          * sera dans la variable $phrases
          */
-        $phrases = [];
+        $json = Storage::get('phrases.json');
+        $phrases = json_decode($json);
+
 
 
         $reponse = null;
@@ -44,7 +47,11 @@ class BotController extends Controller
         /**
          * @todo Remplacer les informations entre [crochet] dans $reponse
          */
+        $placeholders = array("[nom]", "[heure]");
+        $values = array(Auth::user()->name, now());
+        $reponse = str_replace($placeholders, $values, $reponse);
 
+       return var_dump($reponse);
         /**
          * @todo Enregistrer $reponse dans la BDD
          */
@@ -52,5 +59,6 @@ class BotController extends Controller
         /**
          * @todo Redirection vers la page d'accueil
          */
+         return redirect('/');
     }
 }
