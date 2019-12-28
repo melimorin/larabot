@@ -30,7 +30,10 @@
                                     @else
                                         <h4>{{ $user }}</h4>
                                     @endif
-                                    {{$message->message}}
+                                    <p>{{$message->message}}</p>
+                                    @if ($message->id === $messages[0]->id)
+                                    <audio src="https://code.responsivevoice.org/getvoice.php?tl=fr-CA&sv=g3&vn=&pitch=0.5&rate=0.5&vol=1&gender=female&t={{$message->message}}" type="audio/mpeg" controls autoplay="autoplay">
+                                    @endif
                                 </li>
                             </ul>
                         @endforeach
