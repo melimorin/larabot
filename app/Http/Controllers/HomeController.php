@@ -17,8 +17,9 @@ class HomeController extends Controller
     public function index()
     {
         $messages = Message::where('user_id', Auth::id())
+            ->orderBy('id', 'desc')
             ->get();
-        return view('home', ['messages'=>$messages]);
+        return view('home', ['messages'=>$messages, 'user'=>Auth::user()->name]);
     }
 
 
