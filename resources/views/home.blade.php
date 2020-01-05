@@ -22,9 +22,9 @@
                         <input class="btn btn-info w-100" type="submit" value="Envoyer">
                     </form>
 
+                    <ul class="list-group list-group-flush ">
                         @foreach ($messages as $message)
-                            <ul class="list-group list-group-flush @if ($message->response == true) response @endif">
-                                <li class="list-group-item">
+                                <li class="message list-group-item @if ($message->response == true) response @endif">
                                     @if ($message->response == true)
                                         <h4>Larabot</h4>
                                     @else
@@ -35,8 +35,8 @@
                                     <audio src="https://code.responsivevoice.org/getvoice.php?tl=fr-CA&sv=g3&vn=&pitch=0.5&rate=0.5&vol=1&gender=female&t={{$message->message}}" type="audio/mpeg" controls autoplay="autoplay">
                                     @endif
                                 </li>
-                            </ul>
                         @endforeach
+                    </ul>
 
                 </div>
             </div>

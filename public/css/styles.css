@@ -4,3 +4,6 @@
 .response h4 {
     color: #117a8b;
 }
+li.message:first-child, li.message:nth-child(2) {
+    background-color: rgba(161, 216, 224, 0.1);
+}
